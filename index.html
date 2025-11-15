@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORNTEC – The ChatGPT of Gas Leaks</title>
+    <title>VORNTEC — The ChatGPT of Gas Leaks</title>
     <style>
         * {
             margin: 0;
@@ -13,13 +13,12 @@
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: linear-gradient(135deg, #05060a 0%, #0b0c10 100%);
+            background: #050510;
             color: #f5f5f5;
             overflow: hidden;
             position: relative;
         }
 
-        /* Optional subtle dot grid background */
         body::before {
             content: '';
             position: fixed;
@@ -28,9 +27,9 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(0deg, transparent 24%, rgba(54, 207, 201, 0.02) 25%, rgba(54, 207, 201, 0.02) 26%, transparent 27%, transparent 74%, rgba(54, 207, 201, 0.02) 75%, rgba(54, 207, 201, 0.02) 76%, transparent 77%, transparent),
-                linear-gradient(90deg, transparent 24%, rgba(54, 207, 201, 0.02) 25%, rgba(54, 207, 201, 0.02) 26%, transparent 27%, transparent 74%, rgba(54, 207, 201, 0.02) 75%, rgba(54, 207, 201, 0.02) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
+                linear-gradient(0deg, transparent 24%, rgba(0, 82, 255, 0.015) 25%, rgba(0, 82, 255, 0.015) 26%, transparent 27%, transparent 74%, rgba(0, 82, 255, 0.015) 75%, rgba(0, 82, 255, 0.015) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(0, 82, 255, 0.015) 25%, rgba(0, 82, 255, 0.015) 26%, transparent 27%, transparent 74%, rgba(0, 82, 255, 0.015) 75%, rgba(0, 82, 255, 0.015) 76%, transparent 77%, transparent);
+            background-size: 60px 60px;
             pointer-events: none;
             z-index: 0;
         }
@@ -45,9 +44,10 @@
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 4rem 2rem;
+            padding: 2rem 2rem 6rem 2rem;
             opacity: 0;
             transition: opacity 0.5s ease;
+            overflow-y: auto;
         }
 
         section.active {
@@ -56,56 +56,56 @@
         }
 
         .slide-content {
-            max-width: 960px;
+            max-width: 1000px;
             width: 100%;
             position: relative;
+            margin: auto 0;
         }
 
-        /* Typography */
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 300;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.03em;
         }
 
         h2 {
             font-size: 2.5rem;
             font-weight: 300;
             line-height: 1.3;
-            margin-bottom: 2.5rem;
-            letter-spacing: -0.01em;
-            border-bottom: 1px solid rgba(54, 207, 201, 0.3);
-            padding-bottom: 1rem;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+            border-bottom: 1px solid rgba(0, 102, 255, 0.25);
+            padding-bottom: 1.2rem;
         }
 
         h3 {
             font-size: 1.5rem;
             font-weight: 400;
             margin-bottom: 1.5rem;
-            color: #a0a4b8;
+            color: #a0a6b8;
         }
 
         .subtitle {
-            font-size: 1.5rem;
-            color: #a0a4b8;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            color: #b0b5c8;
+            line-height: 1.65;
+            margin-bottom: 0;
             font-weight: 300;
         }
 
         .accent {
-            color: #36cfc9;
+            color: #0066FF;
         }
 
         .mono {
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 0.85em;
-            color: #8f95b2;
+            font-size: 0.8em;
+            color: #7a7f95;
+            letter-spacing: 0.05em;
         }
 
-        /* Layout utilities */
         .two-col {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -113,14 +113,6 @@
             align-items: center;
         }
 
-        .split-content {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        /* Text blocks */
         .text-block {
             margin-bottom: 2.5rem;
         }
@@ -146,43 +138,50 @@
             content: '—';
             position: absolute;
             left: 0;
-            color: #36cfc9;
+            color: #0066FF;
         }
 
         .highlight-box {
-            background: rgba(54, 207, 201, 0.05);
-            border-left: 2px solid #36cfc9;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            background: rgba(0, 102, 255, 0.04);
+            border-left: 3px solid #0066FF;
+            padding: 1.8rem 2rem;
+            margin: 2.5rem 0;
             font-style: italic;
-            color: #d0d0d0;
+            color: #d8d8d8;
+            line-height: 1.7;
         }
 
-        /* Images */
         img {
             max-width: 100%;
             height: auto;
-            opacity: 0.8;
-            filter: saturate(0.7) brightness(0.9);
+            opacity: 0.75;
+            filter: saturate(0.6) brightness(0.85);
+        }
+
+        .logo {
+            opacity: 1;
+            filter: none;
+            max-height: 80px;
+            margin-bottom: 2rem;
         }
 
         .avatar {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 2px solid #36cfc9;
+            border: 2px solid #0066FF;
             object-fit: cover;
             margin-bottom: 1rem;
         }
 
         .logo-strip {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            margin: 2rem 0;
-            opacity: 0.6;
+            margin: 2.5rem 0;
+            opacity: 0.5;
         }
 
         .logo-strip img {
@@ -192,11 +191,10 @@
         }
 
         .logo-muted {
-            opacity: 0.4;
-            max-width: 200px;
+            opacity: 0.35;
+            max-width: 180px;
         }
 
-        /* Founder profiles */
         .founder-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -211,7 +209,7 @@
         .founder h4 {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
-            color: #36cfc9;
+            color: #0066FF;
         }
 
         .founder p {
@@ -220,123 +218,126 @@
             color: #d0d0d0;
         }
 
-        /* Simple charts */
-        .chart-container {
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(0, 102, 255, 0.03);
+            border: 1px solid rgba(0, 102, 255, 0.15);
+            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: #0066FF;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #b0b5c8;
+            line-height: 1.6;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            margin: 3rem 0;
+        }
+
+        .old-way {
+            background: rgba(255, 60, 60, 0.04);
+            border: 1px solid rgba(255, 60, 60, 0.2);
+            border-radius: 8px;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(54, 207, 201, 0.2);
-            border-radius: 4px;
         }
 
-        .bar-chart {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            height: 250px;
-            gap: 2rem;
-            padding: 1rem 0;
+        .old-way h3 {
+            color: #ff6b6b;
+            margin-bottom: 1.5rem;
         }
 
-        .bar {
-            flex: 1;
-            background: linear-gradient(180deg, #36cfc9 0%, rgba(54, 207, 201, 0.4) 100%);
-            border-radius: 4px 4px 0 0;
-            position: relative;
+        .new-way {
+            background: rgba(0, 255, 136, 0.04);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 8px;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            min-width: 80px;
+            justify-content: center;
         }
 
-        .bar-label {
-            position: absolute;
-            bottom: -2.5rem;
-            font-size: 0.9rem;
+        .new-way h3 {
+            color: #00ff88;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-hero {
             text-align: center;
-            width: 100%;
-            color: #a0a4b8;
+            margin-bottom: 3rem;
         }
 
-        .bar-value {
-            position: absolute;
-            top: -2rem;
-            font-size: 1.1rem;
-            color: #36cfc9;
-            font-weight: 500;
+        .solution-statement {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            color: #d8d8d8;
+            font-weight: 300;
+            margin-bottom: 2rem;
         }
 
-        .timeline {
-            position: relative;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(54, 207, 201, 0.2);
-            border-radius: 4px;
-            margin: 2rem 0;
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
         }
 
-        .timeline-axis {
-            position: absolute;
-            bottom: -2rem;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: #8f95b2;
-        }
-
-        .leak-duration {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 10%;
-            width: 40%;
-            height: 30px;
-            background: rgba(255, 100, 100, 0.3);
-            border: 1px solid rgba(255, 100, 100, 0.6);
-            border-radius: 2px;
-        }
-
-        .measurement-window {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 50px;
-            width: 8%;
-            background: rgba(54, 207, 201, 0.4);
-            border: 1px solid #36cfc9;
-            border-radius: 2px;
-        }
-
-        /* Pipeline diagram */
-        .pipeline {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 2rem 0;
-            gap: 1rem;
-        }
-
-        .pipeline-box {
-            flex: 1;
-            padding: 1.5rem;
-            background: rgba(54, 207, 201, 0.05);
-            border: 1px solid rgba(54, 207, 201, 0.3);
-            border-radius: 4px;
+        .solution-card {
+            background: rgba(0, 102, 255, 0.04);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            border-radius: 8px;
+            padding: 2rem 1.5rem;
             text-align: center;
+        }
+
+        .solution-number {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+            border-radius: 50%;
+            background: #0066FF;
+            color: #050510;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .solution-card h4 {
+            color: #0066FF;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .solution-card p {
+            color: #b0b5c8;
+            line-height: 1.6;
             font-size: 0.95rem;
-            line-height: 1.5;
         }
 
-        .pipeline-arrow {
-            color: #36cfc9;
-            font-size: 1.5rem;
-        }
-
-        /* Venn diagram */
         .venn-container {
             position: relative;
-            height: 300px;
+            height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -347,22 +348,23 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            border: 2px solid #36cfc9;
-            background: rgba(54, 207, 201, 0.1);
+            border: 2px solid #0066FF;
+            background: rgba(0, 102, 255, 0.05);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.9rem;
             color: #d0d0d0;
+            padding: 1rem;
         }
 
         .venn-circle.left {
-            left: 30%;
+            left: 35%;
             transform: translateX(-50%);
         }
 
         .venn-circle.right {
-            right: 30%;
+            right: 35%;
             transform: translateX(50%);
         }
 
@@ -371,99 +373,130 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #36cfc9;
-            font-weight: 500;
-            font-size: 1.1rem;
+            color: #0066FF;
+            font-weight: 600;
+            font-size: 1.3rem;
             z-index: 10;
+            text-shadow: 0 0 10px rgba(5, 5, 16, 0.8);
         }
 
-        /* Steps flow */
-        .steps-flow {
+        .phase-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
-            margin: 2rem 0;
+            margin: 2.5rem 0 1.5rem 0;
         }
 
-        .step {
-            text-align: center;
-            padding: 1.5rem 1rem;
-            background: rgba(54, 207, 201, 0.03);
-            border: 1px solid rgba(54, 207, 201, 0.2);
-            border-radius: 4px;
+        .phase-card {
+            background: rgba(0, 102, 255, 0.03);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem 1.2rem;
         }
 
-        .step-number {
+        .phase-number {
             display: inline-block;
-            width: 32px;
-            height: 32px;
-            line-height: 32px;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
             border-radius: 50%;
-            background: #36cfc9;
-            color: #05060a;
+            background: #0066FF;
+            color: #050510;
             font-weight: 600;
-            margin-bottom: 1rem;
-            font-family: ui-monospace, monospace;
+            margin-bottom: 0.8rem;
+            text-align: center;
+            font-size: 1.1rem;
         }
 
-        .step p {
+        .phase-card h4 {
+            color: #0066FF;
+            font-size: 1.05rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .phase-card p {
             font-size: 0.9rem;
             line-height: 1.5;
             color: #d0d0d0;
+            margin-bottom: 0.6rem;
         }
 
-        /* Progress indicator */
+        .phase-metric {
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(0, 102, 255, 0.2);
+            font-size: 0.85rem;
+            color: #00ff88;
+        }
+
+        .checkmark {
+            color: #00ff88;
+            font-weight: 600;
+        }
+
         .progress-indicator {
             position: fixed;
-            bottom: 2rem;
+            bottom: -50px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 0.5rem;
             z-index: 100;
+            background: rgba(5, 5, 16, 0.95);
+            padding: 0.5rem 1rem;
+            border-radius: 20px 20px 0 0;
+            transition: bottom 0.3s ease;
+        }
+
+        .progress-indicator:hover {
+            bottom: 0;
+        }
+
+        body:hover .progress-indicator {
+            bottom: 0;
         }
 
         .progress-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: rgba(54, 207, 201, 0.3);
+            background: rgba(0, 102, 255, 0.4);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .progress-dot.active {
-            background: #36cfc9;
-            transform: scale(1.3);
+            background: #0066FF;
+            transform: scale(1.5);
         }
 
         .progress-dot:hover {
-            background: #36cfc9;
+            background: #0066FF;
         }
 
-        /* Slide number */
         .slide-number {
             position: fixed;
             top: 2rem;
             right: 2rem;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             font-size: 0.85rem;
-            color: #8f95b2;
+            color: #7a7f95;
             z-index: 100;
         }
 
-        /* Navigation hint */
         .nav-hint {
             position: fixed;
-            bottom: 2rem;
+            bottom: 4.5rem;
             right: 2rem;
             font-family: ui-monospace, monospace;
             font-size: 0.75rem;
-            color: #8f95b2;
-            opacity: 0.5;
+            color: #7a7f95;
+            opacity: 0.6;
+            background: rgba(5, 5, 16, 0.8);
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -478,15 +511,18 @@
             }
 
             .two-col,
-            .split-content,
             .founder-grid,
-            .steps-flow {
+            .stat-grid,
+            .comparison-container,
+            .solution-grid,
+            .phase-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
 
             section {
-                padding: 2rem 1.5rem;
+                padding: 2rem 1.5rem 6rem 1.5rem;
+                overflow-y: auto;
             }
 
             .slide-content {
@@ -501,22 +537,13 @@
 </head>
 <body>
     <div class="deck-container">
-        <!-- Slide 1: Title / Purpose -->
+        <!-- Slide 1: Title -->
         <section class="active" data-slide="1">
-            <div class="slide-content">
-                <div class="split-content">
-                    <div>
-                        <h1>VORNTEC<br><span class="accent">The ChatGPT of Gas Leaks</span></h1>
-                        <p class="subtitle">A science-backed approach to predict methane leaks using operational data companies already have.</p>
-                        <p class="text-block" style="color: #a0a4b8; font-size: 1.1rem; line-height: 1.7;">
-                            We turn pressure, temperature and flow data into early-warning signals for leaks, saving emissions and revenue.
-                        </p>
-                    </div>
-                    <div>
-                        <!-- Hero image: gas facility at dusk with subtle data overlay -->
-                        <img src="images/hero-compressor-station.jpg" alt="Minimalistic image of a gas facility at dusk with data overlay">
-                    </div>
-                </div>
+            <div class="slide-content" style="text-align: center; max-width: 900px; margin: 0 auto;">
+                <!-- VORNTEC Logo -->
+                <img src="images/vorntec.png" alt="VORNTEC" class="logo">
+                <h1><span class="accent">The ChatGPT of Gas Leaks</span></h1>
+                <p class="subtitle">A science-backed approach to predict methane leaks using operational data companies already have.</p>
             </div>
         </section>
 
@@ -527,7 +554,7 @@
                 
                 <div class="text-block">
                     <p style="font-size: 1.15rem; line-height: 1.7; color: #d0d0d0; margin-bottom: 2rem;">
-                        We spent more than a year working full-time on identifying global-scale problems we could dedicate the next decade to solving. Most people can't afford that risk. <span class="accent">We chose to take it.</span>
+                        We spent a year validating this problem. <span class="accent">Now we're ready to solve it.</span>
                     </p>
                 </div>
 
@@ -535,64 +562,87 @@
 
                 <div class="founder-grid">
                     <div class="founder">
-                        <!-- Circular profile image for Matías -->
                         <img src="images/matias-profile.jpg" alt="Portrait of Matías" class="avatar">
                         <h4>Matías — the artist</h4>
-                        <p>Client-driven, focused on understanding real operator workflows, constraints, and field realities.</p>
-                        <p>Background in art: starts from the big picture and refines down to the smallest detail.</p>
+                        <p>Founded Practical, embedded with O&G operators in Middle East</p>
+                        <p>Client-driven: understands real operator workflows, constraints, field realities</p>
+                        <p style="font-style: italic; color: #7a7f95; font-size: 0.95rem;">"Starts from the big picture and refines down to the smallest detail"</p>
                     </div>
                     <div class="founder">
-                        <!-- Circular profile image for Marco -->
                         <img src="images/marco-profile.jpg" alt="Portrait of Marco" class="avatar">
                         <h4>Marco — the sailor</h4>
-                        <p>Technically focused on data architecture, modelling, and turning ambiguous operational problems into concrete solutions.</p>
-                        <p>Sailing taught him adaptability: when the context changes, staying on the same course sinks ships.</p>
+                        <p>Founded MST Technology (IoT), led operations at Oxford Quantum Circuits (pre-seed → Series C)</p>
+                        <p>Built data infrastructure across NY, London, and Tokyo</p>
+                        <p>Technically focused: data architecture, modeling, operational problem-solving</p>
+                        <p style="font-style: italic; color: #7a7f95; font-size: 0.95rem;">"When the context changes, staying on the same course sinks ships"</p>
                     </div>
                 </div>
 
-                <p style="margin-top: 2rem; font-size: 1.1rem; color: #36cfc9; text-align: center;">
-                    Our strength: real-world operational insight + deep technical design + resilience.
+                <p style="margin-top: 2rem; font-size: 1.1rem; color: #0066FF; text-align: center;">
+                    Our strength: real-world operational insight + deep technical design + resilience
                 </p>
             </div>
         </section>
 
-        <!-- Slide 3: Problem -->
+        <!-- Slide 3: Climate Problem -->
         <section data-slide="3">
             <div class="slide-content">
-                <h2>The Problem: Methane Leaks Are Expensive and Invisible</h2>
+                <h2>The Climate Impact: Why Methane Matters</h2>
                 
-                <div class="two-col">
-                    <div>
-                        <ul>
-                            <li>95% of natural gas is methane (CH₄).</li>
-                            <li>Methane has <span class="accent">~80× the warming impact</span> of CO₂ and persists for ~12 years — our most powerful short-term climate lever.</li>
-                            <li>Oil & Gas accounts for ~15% of global anthropogenic methane emissions.</li>
-                            <li>Operators can lose up to 6% of their gas through leaks — often <span class="accent">~USD 30M per year</span> per company.</li>
-                            <li>Current detection methods are expensive, fragmented, and unreliable at scale.</li>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">86×</div>
+                        <div class="stat-label">Methane's warming impact over 20 years — our most powerful short-term climate lever</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">~12 years</div>
+                        <div class="stat-label">Short atmospheric lifetime makes it ideal for immediate climate action</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">17%</div>
+                        <div class="stat-label">of global anthropogenic methane emissions come from Oil & Gas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">of natural gas is methane (CH₄)</div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 2rem; margin-bottom: 0; font-size: 1.15rem; color: #b0b5c8; text-align: center; line-height: 1.7;">
+                    Current detection methods are expensive, fragmented, and unreliable at scale.
+                </p>
+            </div>
+        </section>
+
+        <!-- Slide 4: Operator Economics -->
+        <section data-slide="4">
+            <div class="slide-content">
+                <h2>The Business Case: Expensive and Invisible</h2>
+                
+                <div class="two-col" style="align-items: center;">
+                    <div class="stat-card" style="grid-column: 1;">
+                        <div class="stat-number">~$30M</div>
+                        <div class="stat-label">Annual revenue lost per company through gas leaks (up to 6% of production)</div>
+                    </div>
+
+                    <div style="grid-column: 2;">
+                        <h3 class="mono" style="margin-bottom: 1.5rem;">ADDRESSABLE MARKET</h3>
+                        <ul style="font-size: 1.05rem;">
+                            <li>~800 mid-size operators globally ($2-15B revenue)</li>
+                            <li>Significant ESG pressure but lack resources of majors</li>
+                            <li>Facing regulatory requirements to reduce methane</li>
                         </ul>
                     </div>
-                    <div>
-                        <!-- Simple bar chart: Status Quo vs With Predictive AI -->
-                        <div class="chart-container">
-                            <div class="bar-chart">
-                                <div class="bar" style="height: 85%;">
-                                    <span class="bar-value">~$30M</span>
-                                    <span class="bar-label">Status Quo</span>
-                                </div>
-                                <div class="bar" style="height: 45%;">
-                                    <span class="bar-value">~$12M</span>
-                                    <span class="bar-label">With Predictive AI</span>
-                                </div>
-                            </div>
-                            <p class="mono" style="text-align: center; margin-top: 3rem; font-size: 0.8rem;">Annual Lost Gas (USD M)</p>
-                        </div>
-                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 3rem;">
+                    Operators lose money and reputation while contributing to climate change &mdash; but current solutions don't scale to catch every leak.
                 </div>
             </div>
         </section>
 
-        <!-- Slide 4: Validation -->
-        <section data-slide="4">
+        <!-- Slide 5: Validation -->
+        <section data-slide="5">
             <div class="slide-content">
                 <h2>Validation: The Industry Confirms the Pain</h2>
                 
@@ -601,15 +651,14 @@
                         We validated the problem with experts who know the industry from the inside:
                     </p>
                     <ul>
-                        <li><span class="accent">Arthur Lee</span> — Nobel Peace Prize co-recipient (2007), one of the scientific architects of the GHG Protocol.</li>
-                        <li>Two former executives who jointly led <span class="accent">more than 9,000 employees</span> and managed multi-billion-dollar assets.</li>
-                        <li>Operational and ESG teams from: <span class="accent">TGN, TGS, Vista Energy, Pampa Energía, Pan American Energy, Energean.</span></li>
+                        <li><span class="accent">Arthur Lee</span> — Nobel Peace Prize co-recipient (2007), one of the scientific architects of the GHG Protocol</li>
+                        <li><span class="accent">Juan Aranguren</span> — ex-CIO Pan American Energy</li>
+                        <li><span class="accent">Javier Gremes Cordero</span> — ex-CEO PECOM and TGS, ex-COO Maha Energy</li>
+                        <li>Operational and ESG teams from: <span class="accent">TGN, TGS, Vista Energy, Pampa Energía, Pan American Energy, Energean</span></li>
                     </ul>
                 </div>
 
-                <!-- Logo strip -->
                 <div class="logo-strip">
-                    <!-- Placeholder logos for companies mentioned -->
                     <img src="images/logo-tgn.png" alt="TGN logo">
                     <img src="images/logo-tgs.png" alt="TGS logo">
                     <img src="images/logo-vista.png" alt="Vista Energy logo">
@@ -618,257 +667,237 @@
                     <img src="images/logo-energean.png" alt="Energean logo">
                 </div>
 
-                <p style="margin-top: 3rem; font-size: 1.15rem; color: #36cfc9; text-align: center;">
+                <p style="margin-top: 3rem; font-size: 1.15rem; color: #0066FF; text-align: center;">
                     Conclusion: the problem is real, recognized, and urgent across the industry.
                 </p>
             </div>
         </section>
 
-        <!-- Slide 5: Current Solutions -->
-        <section data-slide="5">
+        <!-- Slide 6: Current Solutions Don't Scale -->
+        <section data-slide="6">
             <div class="slide-content">
-                <h2>Today's Tools: Sensors, Aircraft, and Gaps</h2>
+                <h2>Today's Approach Doesn't Scale</h2>
                 
-                <div class="two-col" style="align-items: flex-start;">
-                    <div>
-                        <h3 class="mono">CURRENT METHODS</h3>
-                        <ul>
-                            <li>Satellites — expensive, detect only super-emitters, weather-dependent.</li>
-                            <li>Drones — non-continuous, weather-dependent, special certifications.</li>
-                            <li>Light aircraft — expensive, not continuous, heavily regulated.</li>
-                            <li>Handheld sensors — manual, slow, weather-dependent.</li>
-                            <li>Fixed sensors — expensive to scale and maintain.</li>
+                <div class="comparison-container">
+                    <div class="old-way">
+                        <h3>THE OLD WAY</h3>
+                        <ul style="font-size: 1.05rem;">
+                            <li>Satellites — expensive, only super-emitters, weather-dependent</li>
+                            <li>Drones — non-continuous, weather-dependent, requires certifications</li>
+                            <li>Aircraft — expensive, not continuous, heavily regulated</li>
+                            <li>Handheld sensors — manual, slow, weather-dependent</li>
+                            <li>Fixed sensors — millions to scale and maintain</li>
                         </ul>
+                        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 60, 60, 0.2);">
+                            <p style="color: #ff6b6b; font-weight: 500; margin-bottom: 0.5rem;">REACTIVE:</p>
+                            <p style="font-size: 0.95rem; line-height: 1.6; color: #d0d0d0;">Only confirm leaks while measuring. Cannot determine duration. Miss intermittent leaks entirely.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="mono">THE PROBLEM</h3>
-                        <p style="margin-bottom: 1rem; color: #d0d0d0; line-height: 1.7;">These tools are reactive:</p>
-                        <ul>
-                            <li>They only confirm a leak while measuring.</li>
-                            <li>Most cannot determine duration.</li>
-                            <li>None reliably capture intermittent leaks.</li>
-                        </ul>
+
+                    <div class="new-way">
+                        <h3>THE NEW WAY</h3>
+                        <p style="font-size: 1.3rem; color: #00ff88; font-weight: 400; margin-bottom: 1.5rem;">PREDICTIVE</p>
+                        <p style="font-size: 1.1rem; line-height: 1.7; color: #d8d8d8;">
+                            Use the data you already have. Predict leaks before they happen. Catch intermittent events. 24/7 coverage at a fraction of the cost.
+                        </p>
                     </div>
                 </div>
 
-                <div class="highlight-box">
-                    Methane leaks typically last 3–5 hours (Wang et al., 2022; Stokes et al., 2022). To catch every leak, you'd need continuous sensors everywhere — costing millions.
+                <div class="highlight-box" style="margin-top: 2.5rem;">
+                    Methane leaks typically last 3&ndash;5 hours (Wang et al., 2022; Stokes et al., 2022). To catch every leak with current methods, you'd need continuous sensors everywhere &mdash; costing millions.
                 </div>
-
-                <!-- Timeline showing sparse measurement windows missing leaks -->
-                <div class="timeline">
-                    <div class="leak-duration" title="Typical leak: 3-5 hours"></div>
-                    <div class="measurement-window" style="left: 5%;"></div>
-                    <div class="measurement-window" style="left: 35%;"></div>
-                    <div class="measurement-window" style="left: 70%;"></div>
-                    <div class="measurement-window" style="left: 90%;"></div>
-                    <div class="timeline-axis">
-                        <span>0h</span>
-                        <span>1h</span>
-                        <span>2h</span>
-                        <span>3h</span>
-                        <span>4h</span>
-                        <span>5h</span>
-                    </div>
-                </div>
-                <p class="mono" style="text-align: center; margin-top: 2.5rem; font-size: 0.85rem;">
-                    Sparse measurement windows (teal) often miss intermittent leaks (red)
-                </p>
             </div>
         </section>
 
-        <!-- Slide 6: Solution -->
-        <section data-slide="6">
+        <!-- Slide 7: Solution -->
+        <section data-slide="7">
             <div class="slide-content">
-                <h2>Our Solution: <span class="accent">Predictive Agents</span> Using Operational Data</h2>
-                
-                <p style="font-size: 1.15rem; line-height: 1.7; color: #d0d0d0; margin-bottom: 3rem;">
-                    Leaks follow patterns in operational data before they occur. We detect those patterns using AI and Machine Learning.
-                </p>
-
-                <h3 class="mono">HOW IT WORKS</h3>
-
-                <!-- 4-step flow -->
-                <div class="steps-flow">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <p>Our agent ingests pressure, temperature, flow, and other operational signals.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <p>It learns which combinations of conditions preceded past leaks.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <p>When current conditions resemble risky patterns, it interprets the situation like a domain expert — summarising context, risk, and recommended action.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <p>It can automatically create work orders inside ERP systems (SAP, Oracle, etc.) and notify teams.</p>
-                    </div>
+                <div class="solution-hero">
+                    <h2 style="border: none; padding: 0;">We Turn <span class="accent">Operational Data</span> Into Predictive Intelligence</h2>
+                    <p class="solution-statement">
+                        Leaks follow patterns in pressure, temperature, and flow data before they occur. We detect those patterns using AI.
+                    </p>
                 </div>
 
-                <!-- Pipeline diagram -->
-                <div class="pipeline" style="margin-top: 3rem;">
-                    <div class="pipeline-box">SCADA / Operations Data</div>
-                    <div class="pipeline-arrow">→</div>
-                    <div class="pipeline-box" style="background: rgba(54, 207, 201, 0.1); border-color: #36cfc9;">VORNTEC Agent</div>
-                    <div class="pipeline-arrow">→</div>
-                    <div class="pipeline-box">ERP / Work Orders<br>+ Team Alerts</div>
+                <div class="solution-grid">
+                    <div class="solution-card">
+                        <div class="solution-number">1</div>
+                        <h4>INGEST</h4>
+                        <p>Connects to SCADA and ERP systems. Continuous monitoring of pressure, temperature, flow data.</p>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-number">2</div>
+                        <h4>PREDICT</h4>
+                        <p>ML algorithms estimate leak probability. AI interprets operational context like a domain expert.</p>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-number">3</div>
+                        <h4>ACT</h4>
+                        <p>Agent collaborates with teams via Microsoft Teams. Automatically creates work orders in ERP (e.g., SAP). Tracks resolution until leak is fixed.</p>
+                    </div>
                 </div>
 
                 <div class="highlight-box" style="margin-top: 3rem;">
-                    Chevron found that 79% of detected events could have their source and duration determined using existing operational or inspection data. The insight is already in the system — we make it actionable.
+                    <strong style="color: #0066FF;">Industry Proof:</strong> Chevron found that 79% of detected events could have their source and duration determined using existing operational or inspection data. The insight is already in the system &mdash; we make it actionable.
+                </div>
+
+                <p style="margin-top: 2rem; text-align: center; font-size: 0.95rem; color: #7a7f95;">
+                    Core ML architecture validated on gas sensor pattern recognition (99%+ accuracy on public datasets)
+                </p>
+            </div>
+        </section>
+
+        <!-- Slide 8: Path to Validation -->
+        <section data-slide="8">
+            <div class="slide-content">
+                <h2>How We'll Prove This Works</h2>
+                
+                <p style="font-size: 1.15rem; line-height: 1.6; color: #d0d0d0; margin-bottom: 2.5rem; text-align: center;">
+                    We're backed by academic research showing this is possible &mdash; now we need to prove it in real operations.
+                </p>
+
+                <div class="phase-grid">
+                    <div class="phase-card" style="background: rgba(0, 255, 136, 0.03); border-color: rgba(0, 255, 136, 0.2);">
+                        <div class="phase-number" style="background: #00ff88;">0</div>
+                        <h4 style="color: #00ff88;">Technical Foundation <span class="checkmark">✔</span></h4>
+                        <p>Validated core ML approach on gas sensor pattern recognition</p>
+                        <p>99%+ accuracy on public dataset (UCI Gas Sensor Array Drift)</p>
+                        <div class="phase-metric">✔ Proven: ML can detect patterns in gas-related sensor data</div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-number">1</div>
+                        <h4>Leak Detection Validation</h4>
+                        <p><strong>BGV, 6 weeks</strong></p>
+                        <p>Adapt algorithms to SCADA operational data. Train on real operator data with known leak events.</p>
+                        <div class="phase-metric">✔ Success: 85%+ detection accuracy</div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-number">2</div>
+                        <h4>Operational Deployment</h4>
+                        <p><strong>Post-BGV, 6 months</strong></p>
+                        <p>Live deployment with 3 operators. Test integration with Teams/SAP workflows.</p>
+                        <div class="phase-metric">✔ Success: Prevent 1+ leak per operator worth $500K+</div>
+                    </div>
+
+                    <div class="phase-card">
+                        <div class="phase-number">3</div>
+                        <h4>Commercial Validation</h4>
+                        <p><strong>Month 18</strong></p>
+                        <p>Convert 3 pilots to paying customers at Â£20K/month. Validate across 5 customers in 3 regions.</p>
+                        <div class="phase-metric">✔ Success: Â£1M ARR</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 102, 255, 0.03); border-radius: 8px;">
+                    <p style="font-size: 1.05rem; line-height: 1.6; color: #d0d0d0; text-align: center;">
+                        <span class="accent">Access secured:</span> 6 operators across 3 regions willing to work with us once we have a testable product
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 7: Why Now -->
-        <section data-slide="7">
+        <!-- Slide 9: Why Now -->
+        <section data-slide="9">
             <div class="slide-content">
                 <h2>Why Now: The Perfect Convergence</h2>
                 
-                <div class="two-col" style="align-items: flex-start;">
+                <div class="two-col" style="align-items: center;">
                     <div>
                         <div class="text-block">
-                            <h3 style="color: #36cfc9;">Energy Transition</h3>
-                            <ul>
-                                <li>Natural gas is the bridge fuel — every molecule saved reduces emissions and increases revenue.</li>
-                                <li>Operators face rising pressure from regulators, investors, and society to cut methane quickly.</li>
-                            </ul>
+                            <h3 style="color: #0066FF;">Energy Transition</h3>
+                            <p style="font-size: 1.05rem; line-height: 1.7; color: #d0d0d0;">
+                                Natural gas is the bridge fuel. Operators face rising pressure to cut methane quickly — every molecule saved reduces emissions and increases revenue.
+                            </p>
                         </div>
 
-                        <div class="text-block" style="margin-top: 3rem;">
-                            <h3 style="color: #36cfc9;">AI Maturity</h3>
-                            <ul>
-                                <li>Cloud infrastructure, modern chipsets, and enterprise AI adoption are now mainstream.</li>
-                                <li>For the first time, we can deploy operational AI that:
-                                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
-                                        <li>understands context,</li>
-                                        <li>interprets data like an expert,</li>
-                                        <li>integrates across the entire organisation.</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <div class="text-block" style="margin-top: 2.5rem;">
+                            <h3 style="color: #0066FF;">Enterprise AI Adoption</h3>
+                            <p style="font-size: 1.05rem; line-height: 1.7; color: #d0d0d0;">
+                                Cloud infrastructure, enterprise AI tools, and O&G operators' growing comfort with digital transformation make this possible for the first time.
+                            </p>
                         </div>
                     </div>
 
                     <div>
-                        <!-- Venn diagram -->
                         <div class="venn-container">
                             <div class="venn-circle left">Energy<br>Transition</div>
-                            <div class="venn-circle right">AI<br>Maturity</div>
+                            <div class="venn-circle right">Enterprise AI<br>Adoption</div>
                             <div class="venn-label">VORNTEC</div>
                         </div>
                     </div>
                 </div>
 
-                <p style="margin-top: 3rem; font-size: 1.2rem; color: #36cfc9; text-align: center;">
+                <p style="margin-top: 3rem; font-size: 1.25rem; color: #0066FF; text-align: center;">
                     The timing is ideal to deploy predictive AI for emissions.
                 </p>
             </div>
         </section>
 
-        <!-- Slide 8: Business Model -->
-        <section data-slide="8">
+        <!-- Slide 10: Why BGV -->
+        <section data-slide="10">
             <div class="slide-content">
-                <h2>Business Model: High-Margin B2B SaaS</h2>
-                
-                <div class="two-col">
-                    <div>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2 style="text-align: center;">What We Need BGV For</h2>
+                    
+                    <div style="margin: 2.5rem 0;">
                         <div class="text-block">
-                            <p style="font-size: 1.3rem; color: #36cfc9; margin-bottom: 2rem;">SaaS B2B</p>
-                            <ul style="font-size: 1.1rem;">
-                                <li><span class="accent">USD 20,000/month</span> per agent per company</li>
-                                <li>Annual contracts</li>
-                                <li>Each new deployment improves the model for all clients</li>
+                            <h3 style="color: #0066FF; text-align: center; margin-bottom: 1.5rem;">The 6-Week Plan</h3>
+                            <p style="font-size: 1.15rem; line-height: 1.7; color: #d0d0d0; text-align: center; margin-bottom: 1.5rem;">
+                                <span class="accent">Â£60K gets us:</span> Technical proof that algorithms work on real leak data + 1 operator committed to continuing post-program
+                            </p>
+                            <ul style="font-size: 1rem; max-width: 650px; margin: 0 auto;">
+                                <li style="margin-bottom: 0.8rem;"><strong>Weeks 1-2:</strong> Deploy MVP with first operator, establish data pipeline</li>
+                                <li style="margin-bottom: 0.8rem;"><strong>Weeks 3-4:</strong> Train algorithm on historical data, measure accuracy vs. known leak events</li>
+                                <li style="margin-bottom: 0;"><strong>Weeks 5-6:</strong> Deliver results, refine approach, secure second pilot commitment</li>
                             </ul>
                         </div>
 
-                        <div class="text-block" style="margin-top: 2.5rem;">
-                            <p style="line-height: 1.7; color: #d0d0d0;">
-                                We start with a core emissions-prediction agent per operator, then expand across assets, geographies, and additional agent types (e.g. reliability, safety).
-                            </p>
+                        <div class="text-block" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(0, 102, 255, 0.2);">
+                            <h3 style="color: #0066FF; text-align: center; margin-bottom: 1.2rem; font-size: 1.3rem;">Why BGV Specifically</h3>
+                            <ul style="font-size: 1rem; line-height: 1.7; max-width: 700px; margin: 0 auto;">
+                                <li style="margin-bottom: 0.8rem;">Mission-aligned climate and impact network</li>
+                                <li style="margin-bottom: 0.8rem;">Credibility to unlock data partnerships with operators</li>
+                                <li style="margin-bottom: 0.8rem;">Technical mentorship for deep tech execution</li>
+                                <li style="margin-bottom: 0;">Founder-first philosophy that aligns with how we build</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div>
-                        <!-- Simple ARR projection -->
-                        <div class="chart-container">
-                            <div class="bar-chart">
-                                <div class="bar" style="height: 25%;">
-                                    <span class="bar-label">Year 1</span>
-                                </div>
-                                <div class="bar" style="height: 55%;">
-                                    <span class="bar-label">Year 2</span>
-                                </div>
-                                <div class="bar" style="height: 90%;">
-                                    <span class="bar-label">Year 3</span>
-                                </div>
-                            </div>
-                            <p class="mono" style="text-align: center; margin-top: 3rem; font-size: 0.8rem;">
-                                Illustrative ARR growth as agents scale within and across clients
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide 9: Why BGV -->
-        <section data-slide="9">
-            <div class="slide-content">
-                <div style="max-width: 700px; margin: 0 auto;">
-                    <h2 style="text-align: center;">Why BGV</h2>
-                    
-                    <p style="font-size: 1.2rem; line-height: 1.7; color: #d0d0d0; margin-bottom: 2.5rem; text-align: center;">
-                        We're looking for a partner who understands impact-driven deep tech and can help us scale globally.
-                    </p>
-
-                    <ul style="font-size: 1.05rem;">
-                        <li>Mission-aligned climate and impact network.</li>
-                        <li>Investors who understand global scaling in climate tech.</li>
-                        <li>Domain knowledge in deep tech and sustainability.</li>
-                        <li>Founder-first philosophy that aligns with how we build.</li>
-                    </ul>
-
-                    <p style="margin-top: 3rem; font-size: 1.15rem; line-height: 1.7; color: #36cfc9; text-align: center;">
+                    <p style="margin-top: 2rem; margin-bottom: 0; font-size: 1.1rem; line-height: 1.6; color: #0066FF; text-align: center;">
                         We see BGV not just as capital, but as a long-term partner in turning operational data into climate impact at global scale.
                     </p>
 
-                    <!-- BGV logo placeholder -->
-                    <div style="text-align: center; margin-top: 3rem;">
+                    <div style="text-align: center; margin-top: 1.5rem; margin-bottom: 0;">
                         <img src="images/logo-bgv.png" alt="Bethnal Green Ventures logo" class="logo-muted">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 10: Vision -->
-        <section data-slide="10">
+        <!-- Slide 11: Vision -->
+        <section data-slide="11">
             <div class="slide-content">
-                <h2>Vision: The OpenAI of Emissions</h2>
-                
-                <div style="max-width: 800px; margin: 0 auto;">
-                    <div class="text-block">
-                        <p style="font-size: 1.15rem; line-height: 1.8; color: #d0d0d0; margin-bottom: 1.5rem;">
-                            We're building an open ecosystem where universities, private companies, governments, and institutions can connect to our models to build their own solutions.
+                <div style="max-width: 850px; margin: 0 auto; text-align: center;">
+                    <h2 style="border: none; padding: 0; margin-bottom: 2rem;">Vision: The OpenAI of Emissions</h2>
+                    
+                    <div class="text-block" style="margin: 3rem 0;">
+                        <p style="font-size: 1.4rem; line-height: 1.7; color: #d8d8d8; font-weight: 300; margin-bottom: 2rem;">
+                            An open ecosystem where universities, companies, governments, and institutions connect to our models to build their own emissions solutions.
                         </p>
-                        <p style="font-size: 1.15rem; line-height: 1.8; color: #d0d0d0;">
-                            By standardising how operational data is turned into emissions intelligence, we unlock breakthroughs for the entire energy sector.
+                        <p style="font-size: 1.15rem; line-height: 1.7; color: #b0b5c8;">
+                            By standardizing how operational data becomes emissions intelligence, we unlock breakthroughs for the entire energy sector.
                         </p>
                     </div>
 
-                    <p style="margin: 3rem 0; font-size: 1.3rem; color: #36cfc9; text-align: center; font-weight: 300;">
-                        From single-operator use cases to a global platform for emissions intelligence.
-                    </p>
-
-                    <!-- World map illustration placeholder -->
-                    <div style="text-align: center; margin: 2rem 0;">
-                        <img src="images/world-network-emissions.jpg" alt="Abstract world map with connected emission-intelligence nodes" style="max-width: 600px; opacity: 0.6;">
+                    <div style="margin: 4rem 0; padding: 2.5rem 0; border-top: 1px solid rgba(0, 102, 255, 0.2); border-bottom: 1px solid rgba(0, 102, 255, 0.2);">
+                        <p style="font-size: 1.6rem; color: #0066FF; font-weight: 300; letter-spacing: -0.01em;">
+                            From single-operator use cases to a global platform for emissions intelligence.
+                        </p>
                     </div>
 
-                    <p style="margin-top: 3rem; font-size: 1.2rem; line-height: 1.7; color: #f5f5f5; text-align: center;">
+                    <p style="font-size: 1.25rem; line-height: 1.7; color: #f5f5f5; margin-top: 3rem;">
                         We'd love to explore with BGV how to accelerate this path together.
                     </p>
                 </div>
@@ -888,33 +917,29 @@
         <div class="progress-dot" data-slide="8"></div>
         <div class="progress-dot" data-slide="9"></div>
         <div class="progress-dot" data-slide="10"></div>
+        <div class="progress-dot" data-slide="11"></div>
     </div>
 
-    <!-- Slide number indicator -->
     <div class="slide-number">
-        <span id="current-slide">01</span> / 10
+        <span id="current-slide">01</span> / 11
     </div>
 
-    <!-- Navigation hint -->
     <div class="nav-hint">
         ← → to navigate
     </div>
 
     <script>
-        // Slide navigation system
         let currentSlide = 1;
-        const totalSlides = 10;
+        const totalSlides = 11;
         const sections = document.querySelectorAll('section');
         const progressDots = document.querySelectorAll('.progress-dot');
         const slideNumberDisplay = document.getElementById('current-slide');
 
         function showSlide(n) {
-            // Boundary checks
             if (n > totalSlides) currentSlide = totalSlides;
             if (n < 1) currentSlide = 1;
             else currentSlide = n;
 
-            // Update sections
             sections.forEach((section, index) => {
                 section.classList.remove('active');
                 if (index === currentSlide - 1) {
@@ -922,7 +947,6 @@
                 }
             });
 
-            // Update progress dots
             progressDots.forEach((dot, index) => {
                 dot.classList.remove('active');
                 if (index === currentSlide - 1) {
@@ -930,7 +954,6 @@
                 }
             });
 
-            // Update slide number
             slideNumberDisplay.textContent = currentSlide.toString().padStart(2, '0');
         }
 
@@ -946,7 +969,6 @@
             }
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
                 e.preventDefault();
@@ -963,14 +985,12 @@
             }
         });
 
-        // Progress dot click navigation
         progressDots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
                 showSlide(index + 1);
             });
         });
 
-        // Touch/swipe support for mobile
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -992,7 +1012,6 @@
             }
         }
 
-        // Initialize
         showSlide(1);
     </script>
 </body>
